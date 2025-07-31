@@ -1,25 +1,29 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
-
 class MinStack {
-
     Stack<Integer> stack;
+    Stack<Integer> minStack;
     public MinStack() {
         stack = new Stack<>();
+        minStack = new Stack<>();
     }
 
     public void push(int val) {
-        //this will the function that will be pushing the elements in the constant time
+        //push the elements in to the main stack
         stack.push(val);
+        //now for the minstack i will be adding the values into the min stack only when my new value is smaller than the previous value
+        if (minStack.isEmpty() || minStack.peek() >= val){
+            minStack.push(val);
+        }
     }
 
     public void pop() {
-        //if my stack ias empty it will give me an error, hence
         if (stack.isEmpty()){
             return;
         }
-        stack.pop();
+        int popped = stack.pop();
+        if (popped == minStack.peek()){
+            minStack.pop();
+        }
     }
 
     public int top() {
@@ -32,25 +36,9 @@ class MinStack {
     }
 
     public int getMin() {
-        //this is the additional function that the priblem have
-        //the stack only have pop, peek, remove etc
-        if (stack.isEmpty()){
+        if (minStack.isEmpty()){
             return -1;
         }
-        List<Integer> list = new ArrayList<>(stack);
-        int ans = Integer.MAX_VALUE;
-        for (Integer integer : list) {
-            ans = Math.min(integer, ans);
-        }
-        return ans;
+        return minStack.peek();
     }
 }
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(val);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
- */
