@@ -10,20 +10,14 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        //creating a stack
-        Stack<Integer> stack = new Stack();
+        ListNode prev = null;
         ListNode temp = head;
         while(temp != null){
-            stack.add(temp.val);
-            temp = temp.next;
-        }
-        temp = head;
-        while(temp != null){
-            temp.val = stack.pop();
-            temp = temp.next;
-        }
-        return head;
+            ListNode front = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = front;
+        }   
+        return prev;
     }
 }
-//TC: O(2n)
-//SC: O(2n)
