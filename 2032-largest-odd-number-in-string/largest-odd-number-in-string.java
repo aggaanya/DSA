@@ -1,7 +1,7 @@
 class Solution {
     public static String largestOddNumber(String num) {
         int end = num.length() - 1;
-        StringBuilder ans = new StringBuilder();
+        String ans = "";
         int requiredIndex = -1;
         while (end >= 0){
             if (num.charAt(end) % 2 != 0){
@@ -13,8 +13,8 @@ class Solution {
             end--;
         }
         for (int i = 0; i <= requiredIndex; i++) {
-            ans.append(num.charAt(i));
+            ans += num.charAt(i);
         }
-        return ans.toString();
+        return ans;
     }
 }
