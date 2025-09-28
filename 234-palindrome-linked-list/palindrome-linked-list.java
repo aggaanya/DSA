@@ -9,21 +9,40 @@
  * }
  */
 class Solution {
-    public boolean isPalindrome(ListNode head) {
-        Stack<Integer> stack = new Stack<>();
+    public ListNode reverse(ListNode head){
         ListNode temp = head;
+        ListNode prev = null;
         while (temp != null){
-            stack.push(temp.val);
-            temp = temp.next;
+            ListNode front = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = front;
         }
-        temp = head;
-        while (temp != null){
-            if (stack.peek() != temp.val){
+        return prev;
+    }
+    public boolean isPalindrome(ListNode head) {
+        //finding the middle node
+        ListNode slow = head;
+        ListNode fast = head;
+        if(head.next == null){
+            return true;
+        }
+        while (fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode newHead = reverse(slow.next);
+        ListNode first = head;
+        ListNode second = newHead;
+        while (second != null){
+            if (second.val != first.val){
+                reverse(newHead);
                 return false;
             }
-            stack.pop();
-            temp = temp.next;
+            second = second.next;
+            first = first.next;
         }
+        reverse(newHead);
         return true;
     }
 }
