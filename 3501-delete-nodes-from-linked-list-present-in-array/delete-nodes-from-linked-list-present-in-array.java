@@ -28,6 +28,7 @@ class Solution {
                 }
                 else{
                     prev.next = curr.next;
+                    
                 }
             }
             else{
@@ -35,6 +36,7 @@ class Solution {
                 prev = curr;
             }
             curr = curr.next;
+            
         }
         return head;
     }
