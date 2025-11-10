@@ -1,13 +1,14 @@
 class Solution {
-    public static void main(String[] args) {
-        int n = 16;
-        System.out.println(isPowerOfTwo(n));
-    }
-    public static boolean isPowerOfTwo(int n) {
-        int y = n - 1;
-        if (n > 0){
-            return (n & y) == 0;
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0){
+            return false;
         }
-        return false;
+        if(n <= 2){
+            return true;
+        }
+        if(n % 2 != 0){
+            return false;
+        }
+        return isPowerOfTwo(n / 2);
     }
 }
