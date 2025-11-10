@@ -1,17 +1,14 @@
 class Solution {
-    public static boolean isPowerOfFour(int n) {
-        int count = 0;
-        for (int i = 0; i < 32; i++) {
-            if (((n >>>i)&1) != 0){
-                count++;
-                if (i % 2 != 0){
-                    return false;
-                }
-            }
+    public boolean isPowerOfFour(int n) {
+        if(n <= 0){
+            return false;
         }
-        if (count == 1){
+        if(n == 1 || n == 4){
             return true;
         }
-        else return false;
+        if(n % 4 != 0){
+            return false;
+        }
+        return isPowerOfFour(n / 4);
     }
 }
