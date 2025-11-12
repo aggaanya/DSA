@@ -1,18 +1,39 @@
 class Solution {
-    public int[] sortArray(int[] nums) {
-        //this is the maxHeap, as we want the max element in the last index of the array
-        PriorityQueue<Integer> MaxHeap = new PriorityQueue<>(Collections.reverseOrder());
-        for (int n: nums)
-            MaxHeap.add(n);
-        int size = MaxHeap.size();
-        int [] ans = new int[size];
-        int j = ans.length - 1;
-        for (int i = 0; i < size; i++) {
-            int element = MaxHeap.remove();
-            ans[j] = element;
-            j--;
-
+    public static int[] sortArray(int[] nums) {
+        int low = 0;
+        int high = nums.length - 1;
+        divide(nums, low, high);
+        return nums;
+    }
+    static void divide(int [] arr, int low, int high){
+        if (low >= high){
+            return;
         }
-        return ans;
+        int middle = low + (high - low) / 2;
+        divide(arr, low, middle);
+        divide(arr, middle + 1, high);
+        merge(arr, low, middle, high);
+    }
+    static void merge(int [] arr, int low, int middle, int high){
+        int [] mix = new int[high - low + 1];
+        int k = 0;
+        int start = low;
+        int end = middle + 1;
+        while (start <= middle && end <= high){
+            if (arr[start] <= arr[end]){
+                mix[k++] = arr[start++];
+            }else{
+                mix[k++] = arr[end++];
+            }
+        }
+        while (start <= middle){
+            mix[k++] = arr[start++];
+        }
+        while (end <= high){
+            mix[k++] = arr[end++];
+        }
+        for (int i = 0; i < mix.length; i++){
+            arr[low + i] = mix[i];
+        }
     }
 }
