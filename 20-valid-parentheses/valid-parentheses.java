@@ -1,23 +1,25 @@
 class Solution {
-    public static boolean isValid(String s) {
+    public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (ch == '(' || ch == '[' || ch == '{'){
-                //if I have open paratheses than only i will add
-                stack.push(ch);
+
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '['){
+                //push the opening brackets into the stack
+                stack.push(s.charAt(i));
             }else{
-                if (!stack.isEmpty()){
-                    if(ch == ']'  && stack.peek() == '['){
+                if(!stack.isEmpty()){
+                    if(s.charAt(i) == '}' && stack.peek() == '{'){
                         stack.pop();
-                    } else if (ch == '}'  && stack.peek() == '{') {
-                        stack.pop();
-                    } else if (ch == ')'  && stack.peek() == '(') {
-                        stack.pop();
-                    }else{
-                        return false;
                     }
-                }else {
+                    else if(s.charAt(i) == ']' && stack.peek() == '['){
+                        stack.pop();
+                    }else if(s.charAt(i) == ')' && stack.peek() == '('){
+                        stack.pop();
+                    }
+                    else{
+                            return false;
+                        }
+                }else{
                     return false;
                 }
             }
