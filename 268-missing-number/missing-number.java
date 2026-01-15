@@ -1,13 +1,14 @@
 class Solution {
-    //In this question, I will be using gaussian method
-    public static int missingNumber(int [] nums) {
-        //this was the hidden concept behind this question to get the value of n
-        int n = nums.length;
-        int gaussianFormula = n * (n + 1) / 2;
+    public int missingNumber(int[] nums) {
         int sum = 0;
-        for (int num : nums) {
-            sum += num;
+        //this is the actual sum of the array
+        for(int n: nums){
+            sum += n;
         }
-        return gaussianFormula - sum;
+        int BigSum = 0;
+        for(int i = 1; i <= nums.length; i++){
+            BigSum += i;
+        }
+        return BigSum - sum;
     }
 }
