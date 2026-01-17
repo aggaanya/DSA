@@ -1,19 +1,22 @@
 class Solution {
-    public static int [] searchRange(int [] nums, int target){
-        int firstPosition = -1;
-        int lastPosition = -1;
-        for (int start = 0; start < nums.length; start++) {
-            if (nums[start] == target){
-                firstPosition = start;
+    public int[] searchRange(int[] nums, int target) {
+        int firstOcc = -1;
+        for(int i = 0; i < nums.length; i++){
+            if(target == nums[i]){
+                firstOcc = i;
                 break;
             }
         }
-        for (int end = nums.length - 1; end >= 0; end--) {
-            if (nums[end] == target){
-                lastPosition = end;
+        int lastOcc = -1;
+        for(int i = nums.length - 1; i >= 0; i--){
+            if(target == nums[i]){
+                lastOcc = i;
                 break;
             }
         }
-        return new int []{firstPosition, lastPosition};
+        if(firstOcc != -1 && lastOcc != -1){
+            return new int[]{firstOcc, lastOcc};
+        }
+        return new int[]{firstOcc, lastOcc};
     }
 }
